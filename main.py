@@ -171,7 +171,7 @@ def planner_theme(l1, l2, l3, l4, info,  company_goals, target_audience, desired
     Desired Outcomes: {desired_outcomes}
     """
     ,
-    llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}]},
+    llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}], "cache_seed": None},
     human_input_mode="NEVER",
     )
 
@@ -311,7 +311,7 @@ Accuracy and adherence to the format are essential.""",
         )
     manager = GroupChatManager(
         groupchat=group_chat,
-        llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}]},
+        llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}], "cache_seed": None},
     )
 
     chat_result = manager.initiate_chat(
@@ -365,7 +365,7 @@ def prompt_generation(theme, storyline, info):
 
     prompt_generator = autogen.AssistantAgent(
         name="PromptGenerator",
-        llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}]}, 
+        llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}], "cache_seed": None}, 
         system_message=(
             "You are a highly creative assistant specializing in generating descriptive image prompts. "
             "Your goal is to craft concise yet vivid prompts that effectively capture the user's storyline, "
@@ -436,7 +436,7 @@ class PostCalculatorAgent(autogen.ConversableAgent):
 - Scope: Focus solely on the calculation and explanation based on the given input. Do not include any additional commentary or information outside the JSON structure.
 """,
             llm_config={
-                "config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"], "temperature" : 0}],
+                "config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"], "temperature" : 0}], "cache_seed": None
             }
         )
 
@@ -531,7 +531,7 @@ def calendar_scheduler(calendar_of_month, theme, storyline, festivals, dates_blo
 
     calendar_scheduler = autogen.AssistantAgent(
         name="CalendarScheduler",
-        llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}]},
+        llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}], "cache_seed": None},
         system_message="""
         You are a highly efficient assistant specializing in calendar scheduling for social media posts.
         Your task is to assign a storyline to a single available date, considering festivals, themes, and avoiding 
@@ -583,7 +583,7 @@ def theme_with_date(n,info,company_goals,target,desired,festivals,weeks_distribu
     Desired Outcomes: {desired}
     Notable Festivals & Events for this month: {festivals}
     """,
-    llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}]},
+    llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}], "cache_seed": None},
     human_input_mode="NEVER",
     )
     themes = planner.generate_reply(messages=[{"content": info, "role": "user"}])
@@ -771,7 +771,7 @@ Return only the JSON output without additional text or explanations.""",
 
     manager = GroupChatManager(
             groupchat=group_chat,
-            llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}]},
+            llm_config={"config_list": [{"model": "gpt-4", "api_key": os.environ["OPENAI_API_KEY"]}], "cache_seed": None},
         )
 
     chat_result = manager.initiate_chat(
